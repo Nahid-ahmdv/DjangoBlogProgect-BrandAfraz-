@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
-import os                 #(static خودم برای)This line imports the os module, which provides a way to interact with the operating system. It allows you to perform operations like joining file paths, which is essential for ensuring that your code works across different operating systems (Windows, macOS, Linux).
+import os                 #(static خودم برای)This line imports the 'os' module, which provides a way to interact with the operating system. It allows you to perform operations like joining file paths, which is essential for ensuring that your code works across different operating systems (Windows, macOS, Linux).
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -53,22 +53,36 @@ MIDDLEWARE = [
 
 ROOT_URLCONF = 'core.urls'
 
+
+
+##The 'TEMPLATES' setting in your Django project's 'settings.py' file is a crucial configuration that defines how Django handles templates. Let's break down the components of this 'TEMPLATES' setting:
 TEMPLATES = [
     {
-        'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
-        'APP_DIRS': True,
-        'OPTIONS': {
-            'context_processors': [
-                'django.template.context_processors.debug',
-                'django.template.context_processors.request',
-                'django.contrib.auth.context_processors.auth',
-                'django.contrib.messages.context_processors.messages',
+        'BACKEND': 'django.template.backends.django.DjangoTemplates', ##'BACKEND':1)What it is: This specifies the template engine that Django will use to render templates.2)In your case: 'django.template.backends.django.DjangoTemplates' indicates that Django's built-in template engine will be used.
+        'DIRS': [BASE_DIR / 'templates'], #این براکت اول خالی بود بعد توش نوشتم ##'DIRS':1)What it is: This is a list of directories where Django will look for template files.2)In your case: [BASE_DIR / 'templates'] tells Django to look for templates in a directory named 'templates' at the same level as your 'manage.py' file (the root of your project). The 'BASE_DIR' variable is a path to the root directory of your project. #را ساختم templates بعد هم رفتم در رووت اصلی پروژه فایل 
+       #'DIRS': [os.path.join(BASE_DIR, 'templates')] #را ایمپورت کرده‌ایم os اینجوری هم خط بالا رو می‌شد بنویسیم چون در خط 14 ماژول #The line 'DIRS': [os.path.join(BASE_DIR, 'templates')] in your Django 'settings.py' file specifies where Django should look for template files.In your case:This would create a path like 'BASE_DIR/'templates'' on Unix-like systems or BASE_DIR\'templates'' on Windows, depending on the OS.
+        'APP_DIRS': True,   ##'APP_DIRS':1)What it is: This is a boolean value that tells Django whether to look for templates in each app's 'templates' subdirectory.2)In your case: Setting it to 'True' means that Django will automatically look for templates inside a folder named 'templates' within each installed app. For example, if you have an app called 'myapp', Django would look for templates in 'myapp/templates/'.
+        'OPTIONS': {        ##'OPTIONS':1)What it is: This dictionary allows you to specify additional options for the template engine.2)In your case: The 'context_processors' key within 'OPTIONS' lists the context processors that will be used by the template engine.
+            'context_processors': [      ##Context processors are functions that take a request object as an argument and return a dictionary of items to be added to the context of every template rendered with this template engine. Here's what each of the listed context processors does:
+                'django.template.context_processors.debug',   ##'django.template.context_processors.debug': Adds debug information if 'DEBUG' is set to 'True'. It includes variables such as the current request and any errors encountered.
+                'django.template.context_processors.request', ##'django.template.context_processors.request': Adds the request object to the context, allowing you to access request data in your templates.
+                'django.contrib.auth.context_processors.auth',  ##'django.contrib.auth.context_processors.auth': Adds user authentication information to the context, such as the currently logged-in user and their permissions.
+                'django.contrib.messages.context_processors.messages', ##'django.contrib.messages.context_processors.messages': Adds messages from the messaging framework (used for displaying one-time notifications).
             ],
         },
     },
 ]
-
+'''
+In summary, a template in Django is an HTML file with placeholders for dynamic content, allowing you to generate web pages dynamically based on data from your application. It plays a crucial role in rendering views and presenting information to users in a structured manner while maintaining separation from the underlying business logic.
+Templates are used to generate HTML dynamically and render content for web pages.
+########################
+Summary
+In summary, this 'TEMPLATES' setting configures how Django renders HTML templates by specifying:
+The template engine to use.
+Where to find templates (both globally in the 'templates' directory and within apps).
+Additional options like context processors that enrich the data available in your templates.
+This setup allows you to create dynamic web pages by combining HTML with Python code and data from your views, making it a fundamental part of building web applications with Django.
+'''
 WSGI_APPLICATION = 'core.wsgi.application'
 
 
@@ -117,7 +131,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'  #(کامنت خودم) This setting defines the base URL for serving static files. It typically looks like this. This means that when you access گ/static/گ in your browser, Django will know to look for static files.
+STATIC_URL = '/static/'  #(کامنت خودم) This setting defines the base URL for serving static files. It typically looks like this. This means that when you access 'static' in your browser, Django will know to look for static files.
 #دقیقا این نارجی بالا باید همنام با فایلی باشه که در اپ‌مون ساختیم برای فایل‌های استاتیک تا بتونه پیداش کنه
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] #This setting tells Django where to look for additional static files (Static files include assets like CSS, JavaScript, and images that are used in your web application) outside of the default locations (like app directories). You should add the path to your newly created "static" directory. This configuration allows Django to find static files stored in the "static" folder at the root of your project.
 #'BASE_DIR' is typically defined earlier in your 'settings.py' file and represents the base directory of your Django project. 'os.path.join(BASE_DIR, 'static')' constructs a full path to the "static" directory located within your project's base directory. This ensures that the path is correctly formatted for the operating system being used.
