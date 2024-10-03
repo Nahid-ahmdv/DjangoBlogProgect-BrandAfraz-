@@ -1,9 +1,9 @@
 ##ساختیم و نوشتیم core فولدر urls.py در path('user/', include('user.urls')) این صفحه را بلافاصله بعد از نوشتن
 from django.urls import path
-from .views import test_view
+from .views import test_view, register_view
 urlpatterns =[
-    #path('register/', registerview, name='register')  #ما هنوز ویوی مربوط به رجیستر رو ننوشتیم برای همین فعلا کامنتش میکنیم
-    path('test/', test_view, name='test')    #را test_view براش نمایش بده test/ نوشت user اگه کاربر مثلا اومد توی
+    path('register/', register_view, name='register'),  #ما هنوز ویوی مربوط به رجیستر رو ننوشتیم برای همین فعلا کامنتش میکنیم
+    path('test/', test_view, name='test'),    #را test_view براش نمایش بده test/ نوشت user اگه کاربر مثلا اومد توی
 ]
 
 '''

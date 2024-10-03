@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>  <!--المنت لینک یکسری اتریبیوت داره یکی‌اش که یو‌آرال اون سورسی هست که می‌خواهیم لینکش کنیم و یکی هم رابطه‌اش با داکیومنت جاری ما و بقیه‌اش هم پایینه-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"    
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous"> <!--crossorigin="anonymous": This attribute is used for CORS (Cross-Origin Resource Sharing) requests. It allows the browser to make requests for resources from different origins without including credentials (like cookies or HTTP authentication).-->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"    
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script> <!--'integrity' Attribute: This attribute provides a base64-encoded hash that allows the browser to verify that the file has not been tampered with. It enhances security by ensuring that the file loaded is exactly what was intended.-->
+    <meta charset="UTF-8"> <!--<meta> Tag: This is an HTML element that provides metadata about the HTML document, which is not displayed on the page itself but helps browsers and search engines understand how to process the content. 'charset' Attribute: This attribute defines the character encoding used in the document. Character encoding determines how characters are represented in bytes.-->
+    <title>Register</title>  <!--اسم اون تبی که باز میشه-->
+</head>
+<body>
+<div class="d-flex bg-success justify-content-center"><!--باعث میشه کل فرم ما وسط نمایش داده بشه و در واقع کانتینر کل فرم ماست--> <!--This uses Bootstrap classes to create a flexbox container that centers its content both vertically and horizontally.-->
+    <div class="col-sm-4 bg-warning">  <!--This defines a column that takes up 4 out of 12 columns in Bootstrap's grid system on small screens and larger. It effectively sets the width of the form container.-->
+        {%if messages%}   <!--مثلا خط 62 و 67 ست کردیم و شرط ایجادشون رو نوشتیم views.py یعنی اگه مسیجی وجود داشت منظور از مسیج هم همان‌هایی هست که در فایل-->
+        {% for message in messages%} <!--کلا چیزایی که حالت دستوری دارن رو با آکولاد و علامت درصد می‌نویسیم اگه چیزی رو می‌خواستیم نمایش بدیم با دو تا آکولاد -->
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            {{message}}  <!--اون مسیج رو نمایش بده-->
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+
+        {%endfor%}
+        {%endif%}
+        <form method="POST">  <!--چون اینجا اتریبیوت اکشن رو ننوشتیم اون دکمه باتن ته این المنت فرم رو که بزنیم به همین یوآرال‌ایی که توشیم ارسال میشه فرممون ول با متد پست این دفعه-->
+            {% csrf_token %}  <!--برای دلایل امنیتی که چون داریم از فرانتمون بهش ریکوئست می‌زنیم به مشکل نخوره-->
+
+            {% for field in form %}
+            <div class="form-group">
+                <label for="{{field.id_for_label}}"> {{field.label}}</label> <!--کلا وقتی می‌خواهید دسترسی داشته باشید به چیزی که از سمت بک داره ارسال میشه به یک المنت خص، باید دو تا آکولاد باز کنید و اون چیزی که می‌خواهید از بک بگیرید را اون وسط بنویسید. ولی اگه قراره یک عملیاتی را انجام دهید  مثلا مثل خط 25 که داریم توکن را ارسال می‌کنیم  باید یک آکولاد و درصد باز کنید و بعد عملیاتی که مدنظرتون هست را بنویسید. بهش میگن جنگو تمپلیت چون اجازه میده بهتون وسط فایل اچ تی ام ال پایتون کد بزنید و مثلا هر دستور ایف یا حلقه فور که می‌نویسید تهش هم باید یدونه اند ایف یا اند فور هم بنویسید-->
+                {{field}}
+                {% if field.errors %}   <!--ارورهای مربوط به هرکدام از فیلدهاست که اینجا داریم می‌گیم اگه هرکدام از فیلدها اروری داشتن، بهمون پایین اون فیلد نشون بده-->
+                <div class="text-danger">
+                    {% for error in field.errors %}
+                        <p>{{ error }}</p>  <!-- Display each error -->
+                    {% endfor %}
+                </div>
+                {% endif %}
+            </div>
+
+            {%endfor%}
+
+            <button type="submit" class="btn btn-primary">Sign up</button>
+
+        </form>
+    </div>
+
+</div>
+</body>
+</html>
+
+<!--
+Sure! Let’s break down the provided HTML code snippet, which is part of a Django template for rendering a form. This code uses Bootstrap for styling and includes features for displaying messages and handling form errors.
+Breakdown of the Code
+Outer Container:
+xml
+<div class="d-flex bg-success justify-content-center">
+
+This <div> serves as a flex container using Bootstrap's utility classes:
+d-flex: Applies Flexbox layout to the container, allowing for flexible positioning of child elements.
+bg-success: Sets the background color to a success color (usually green) as defined by Bootstrap.
+justify-content-center: Centers the child elements horizontally within the flex container.
+Inner Column:
+xml
+<div class="col-sm-4 bg-warning">
+
+This <div> creates a column that takes up 4 out of 12 columns in Bootstrap’s grid system on small screens and larger.
+bg-warning: Sets the background color to a warning color (usually yellow) as defined by Bootstrap.
+Message Display:
+
+{if messages}
+{ for message in messages }
+<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    {{ message }}
+    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+</div>
+{endfor }
+{ endif }
+
+{ if messages }: Checks if there are any messages to display (e.g., success or error messages).
+{ for message in messages }: Iterates over each message in the messages context variable.
+Alert Box: Each message is displayed in an alert box styled with Bootstrap:
+alert alert-danger: Indicates that this is a danger alert (usually red).
+alert-dismissible fade show: Makes the alert dismissible (can be closed by the user) and applies fading effects.
+The message content is rendered with {{ message }}.
+The close button allows users to dismiss the alert.
+Form Definition:
+xml
+<form method="POST">
+    {csrf_token }
+    ...
+    <button type="submit" class="btn btn-primary">Sign up</button>
+</form>
+
+The <form> element uses the POST method to submit data securely.
+{% csrf_token %}: This tag generates a CSRF token for security, protecting against Cross-Site Request Forgery attacks.
+Dynamic Field Rendering:
+xml
+{% for field in form %}
+<div class="form-group">
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+    {% if field.errors %}
+    <div class="text-danger">
+        {% for error in field.errors %}
+            <p>{{ error }}</p>
+        {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endfor %}
+
+This block iterates over each field in the form object.
+Each field is rendered inside a <div> with the class form-group, which is a Bootstrap convention for grouping labels and inputs.
+The label is associated with its input using for="{{ field.id_for_label }}", ensuring accessibility.
+The actual input field is rendered with {{ field }}.
+If there are any validation errors associated with the field, they are displayed in red text (text-danger) below the input.
+Submit Button:
+xml
+<button type="submit" class="btn btn-primary">Sign up</button>
+
+This button submits the form when clicked, styled with Bootstrap's primary button class.
+Summary
+In summary, this HTML snippet creates a responsive form layout using Bootstrap classes and Django template tags. Key features include:
+A flexbox container that centers the form on the page with success and warning background colors.
+Dynamic display of messages (success or error) at the top of the form.
+A secure POST form that includes CSRF protection.
+Iteration over form fields to render them along with their labels and error messages, ensuring proper user feedback.
+This structure provides a user-friendly interface for signing up or registering users while maintaining good practices for styling and security.
+-->
