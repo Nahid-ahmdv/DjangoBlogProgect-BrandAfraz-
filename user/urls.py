@@ -1,11 +1,12 @@
 ##ساختیم و نوشتیم core فولدر urls.py در path('user/', include('user.urls')) این صفحه را بلافاصله بعد از نوشتن
 from django.urls import path
-from .views import test_view, register_view
+from .views import test_view, register_view, logout_custom
 from django.contrib.auth.views import LoginView
 urlpatterns =[
-    path('register/', register_view, name='register'),  #ما هنوز ویوی مربوط به رجیستر رو ننوشتیم برای همین فعلا کامنتش میکنیم
-    path('login/', LoginView.as_view(), name="login"),
-    path('test/', test_view, name='test'),    #را test_view براش نمایش بده test/ نوشت user اگه کاربر مثلا اومد توی
+    path('register/', register_view, name='register'), #FBV #ما هنوز ویوی مربوط به رجیستر رو ننوشتیم برای همین فعلا کامنتش میکنیم
+    path('login/', LoginView.as_view(), name="login"), #CBV
+    path('logout', logout_custom, name="logout"), #CBV
+    path('test/', test_view, name='test') #FBV   #را test_view براش نمایش بده test/ نوشت user اگه کاربر مثلا اومد توی
 ]
 
 '''

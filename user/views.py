@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.views.decorators.csrf import csrf_exempt, csrf_protect
-from django.contrib.auth import login
+from django.contrib.auth import login, logout
 from django.contrib import messages
 from .forms import UserRegisterForm
 '''
@@ -82,3 +82,6 @@ It prepares a context for rendering a registration template with either an empty
 This view encapsulates a common pattern for handling user registrations in Django applications effectively.
 
 '''
+def logout_custom(request):
+    logout(request)
+    return redirect("home_page")
