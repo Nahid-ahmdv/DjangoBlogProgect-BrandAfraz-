@@ -29,7 +29,11 @@ class UserRegisterForm(UserCreationForm):  #The 'UserCreationForm' is a built-in
     In summary, an HTML widget in Django forms is an essential component that defines how input fields are displayed and interacted with on a web page. 
     It manages both the rendering of the HTML elements and the extraction of user input data upon form submission. 
     Understanding widgets allows developers to create more interactive and user-friendly web applications by leveraging various input types effectively.
-        '''
+    
+    اضافه
+    In summary, while both 'UserCreationForm' and 'forms.ModelForm' serve the purpose of creating forms in Django, they are tailored for different use cases. 
+    'UserCreationForm' is specialized for user registration processes, while 'forms.ModelForm' provides a flexible way to create forms based on any model in your application. Depending on your specific needs—whether you're handling user data or other types of data—you would choose one over the other.
+    '''
 
 
 
@@ -55,7 +59,10 @@ class UserRegisterForm(UserCreationForm):  #The 'UserCreationForm' is a built-in
         self.fields['password2'].widget.attrs['class'] = 'form-control'
 
 
-
+# class UseLoginForm(forms.ModelForm):   #پس فرم‌ها هم مثل مدل‌ها خود یک کلاس هستند   #This line defines a form class called 'UseLoginForm' that inherits from 'forms.ModelForm'. This is part of Django's form handling system, which allows you to create forms based on your models easily.
+#     class Meta:
+#         model = User #یعنی اینکه براساس این مدل می‌خواهیم یک فرم بسازیم
+#         fields = ['email', 'password']
 
 
 
