@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    'user'
+    'user',
+    'blog'
 ]
 
 MIDDLEWARE = [
@@ -131,8 +132,8 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
-STATIC_URL = '/static/'  #(کامنت خودم) This setting defines the base URL for serving static files. It typically looks like this. This means that when you access 'static' in your browser, Django will know to look for static files.
-#دقیقا این نارجی بالا باید همنام با فایلی باشه که در اپ‌مون ساختیم برای فایل‌های استاتیک تا بتونه پیداش کنه
+STATIC_URL = '/static/'                                     #(کامنت خودم) This setting defines the base URL for serving static files. It typically looks like this. This means that when you access 'static' in your browser, Django will know to look for static files.
+                                                           #دقیقا این نارجی بالا باید همنام با فایلی باشه که در اپ‌مون ساختیم برای فایل‌های استاتیک تا بتونه پیداش کنه
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')] #This setting tells Django where to look for additional static files (Static files include assets like CSS, JavaScript, and images that are used in your web application) outside of the default locations (like app directories). You should add the path to your newly created "static" directory. This configuration allows Django to find static files stored in the "static" folder at the root of your project.
 #'BASE_DIR' is typically defined earlier in your 'settings.py' file and represents the base directory of your Django project. 'os.path.join(BASE_DIR, 'static')' constructs a full path to the "static" directory located within your project's base directory. This ensures that the path is correctly formatted for the operating system being used.
 #By setting 'STATICFILES_DIRS', you inform Django where to find additional static files beyond the default locations (like each app's "static" directory). In this case, it tells Django to look in the "static" folder at the root of your project for any static assets.
