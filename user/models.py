@@ -100,7 +100,8 @@ class User(AbstractUser): #The User class inherits from Django's AbstractUser, w
     class Meta:                  #class Meta: is an inner class used to provide metadata to the model. ' db_table = "auth_user" ' specifies the name of the database table that will store this model's data. By default, Django would create a table named 'appname_user', but this line changes it to 'auth_user', which is commonly used for user-related tables in Django applications.
         db_table = "auth_user"   #user_user اسم اون تیبلی که در دیتابیس قراره ساخته بشه برای ذخیره دیتای مربوط به این مدل‌مان، را مشخص کردیم اگه این خط را نمینوشتیم اسم تیبل‌مان می‌شد
 
-
+    def __str__(self):    #است که ما بالاتر برابر با ایمیلش قرار داریم ولی خب ما دوست داشتیم همون یوزرنیم باشه "USERNAME_FIELD" اگه ما کلا این متد رو برای کلاس یوزر ننویسیم، دیفالتش
+        return self.username
 
 
 class Profile(models.Model):   #defines a Django model named 'Profile' that inherits from Django's base 'models.Model' class. This allows you to create a database table to store additional information about a user, beyond what is provided by Django's built-in User model.
@@ -116,16 +117,16 @@ class Profile(models.Model):   #defines a Django model named 'Profile' that inhe
 #'user_profile' که خب اینجا اسم اپ‌مون یوزر هست و اسم مدلمون هم پروفایل پس اسم تیبلمون میشه 'appname_user'اسم دیفالتش هم اینجوریه
 #
 '''
-'ForeignKey' Field: (one-to-many relation)
+'ForeignKey' Field: (To implement a 'one-to-many' or 'many-to-one' relationship in Django, you use the 'ForeignKey' field.)
 user = models.ForeignKey(User, on_delete=models.CASCADE) defines a field named user in the Profile model.
 The 'ForeignKey' field creates a many-to-one relationship between the 'Profile' model and the 'User' model. This means that each profile can be associated with one user, but a user can have multiple profiles (if you were to allow that). 
 
 'OneToOneField' Field:
 user = models.OneToOneField(User, on_delete=models.CASCADE)
-you establish a one-to-one relationship between the Profile model and the User model. This means that each user can have only one profile, and each profile is linked to exactly one user.
+you establish a one-to-one relationship between the 'Profile' model and the 'User' model. This means that each user can have only one profile, and each profile is linked to exactly one user.
 Parameters Explained
 User:
-This specifies the model that the foreign key points to (in this case it would be User model that we've definded lately).Each instance of the Profile model will be linked to a specific user.
+This specifies the model that the foreign key points to (in this case it would be 'User' model that we've definded lately).Each instance of the 'Profile' model will be linked to a specific user.
 on_delete=models.CASCADE:
 This parameter specifies the behavior to adopt when the referenced user is deleted.
 CASCADE: If the user associated with a profile is deleted, then the corresponding profile will also be deleted automatically. This is useful for maintaining data integrity, ensuring that there are no orphaned profiles left in the database if their associated user is removed.
