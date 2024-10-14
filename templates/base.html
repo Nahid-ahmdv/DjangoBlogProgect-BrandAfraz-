@@ -16,7 +16,7 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarNav">
             <ul class="navbar-nav ms-auto">
-                {% if user.is_authenticated %}
+                {% if user.is_authenticated %}   <!--وقتی لاگ‌این باشیم این مقدار ترو برمی‌گردونه. و این یوزری که داریم در تمپلیت استفاده می‌کنیم لازم نیست از توی کانتکست‌هامون پاسش بدیم. یعنی اون قسمتی که داره رندر میشه لازم نیست اینو پاس بدیم به ویومون چون این یوزر رو همیشه خودش ارسال میکنه جنگو-->
                     <li class="nav-item">
                         <a class="nav-link" href="#">Hello, {{ user.username }}!</a>
                     </li>
